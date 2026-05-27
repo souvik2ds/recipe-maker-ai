@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeMaker AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 1rem;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #d1d5db;
+        }
+
+        input:focus {
+            background: rgba(255,255,255,0.22);
+            transform: scale(1.01);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(249,115,22,0.4);
+        }
+
+        .output {
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 25px;
+            color: white;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            min-height: 180px;
+            font-size: 0.96rem;
+        }
+
+        .loading {
+            color: #fbbf24;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="title">🍳 RecipeMaker AI</h1>
+    <p class="subtitle">Create delicious AI-powered recipes instantly</p>
+
+    <div class="form-group">
+        <label>Ingredients *</label>
+        <input type="text" id="ingredients" placeholder="e.g. chicken, onion, tomato">
+    </div>
+
+    <div class="form-group">
+        <label>Cuisine (Optional)</label>
+        <input type="text" id="cuisine" placeholder="e.g. Indian, Italian, Chinese">
+    </div>
+
+    <div class="form-group">
+        <label>Diet Plan (Optional)</label>
+        <input type="text" id="dietPlan" placeholder="e.g. High Protein, Keto, Vegan">
+    </div>
+
+    <button onclick="generateRecipe()">Generate Recipe</button>
+
+    <div class="output" id="output">
+        Your AI-generated recipe will appear here...
+    </div>
+</div>
+
+<script>
+    async function generateRecipe() {
+        const ingredients = document.getElementById("ingredients").value.trim();
+        const cuisine = document.getElementById("cuisine").value.trim();
+        const dietPlan = document.getElementById("dietPlan").value.trim();
+        const output = document.getElementById("output");
+
+        if (!ingredients) {
+            output.textContent = "⚠ Please enter ingredients.";
+            return;
+        }
+
+        output.innerHTML = "<span class='loading'>Generating your recipe...</span>";
+
+        let url = `/ask?ingredients=${encodeURIComponent(ingredients)}`;
+
+        if (cuisine) {
+            url += `&cuisine=${encodeURIComponent(cuisine)}`;
+        }
+
+        if (dietPlan) {
+            url += `&dietPlan=${encodeURIComponent(dietPlan)}`;
+        }
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error("Request failed");
+            }
+
+            const data = await response.text();
+            output.textContent = data;
+
+        } catch (error) {
+            console.error(error);
+            output.textContent = "❌ Failed to generate recipe. Please try again.";
+        }
+    }
+</script>
+
+</body>
+</html>
