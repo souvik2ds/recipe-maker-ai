@@ -27,21 +27,13 @@ public class RecipeService {
         .system("""
                 You are an expert chef.
                 
-                Create recipes based on user preferences.
+                         Create recipes based on user preferences.
                 
-                Return ONLY valid JSON.
+                         Return valid JSON only.
                 
-                No markdown.
-                No explanation.
-                No extra words.
-                
-                Response format:
-                
-                {
-                  "dishName": "string",
-                  "ingredients": ["item1", "item2"],
-                  "steps": ["step1", "step2"]
-                }
+                         No markdown.
+                         No explanation.
+                         No extra text.
                 """)
         .user("""
                 Ingredients: %s
