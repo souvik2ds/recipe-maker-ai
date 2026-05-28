@@ -6,195 +6,325 @@
     <title>RecipeMaker AI</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:"Segoe UI", Arial, sans-serif;
         }
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        .container{
+            width:100%;
+            max-width:900px;
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.15);
+            border-radius:24px;
+            padding:40px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.35);
         }
 
-        .title {
-            text-align: center;
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 10px;
+        .title{
+            text-align:center;
+            font-size:2.8rem;
+            font-weight:700;
+            color:white;
+            margin-bottom:10px;
         }
 
-        .subtitle {
-            text-align: center;
-            color: #cbd5e1;
-            font-size: 1rem;
-            margin-bottom: 35px;
+        .subtitle{
+            text-align:center;
+            color:#cbd5e1;
+            font-size:1rem;
+            margin-bottom:35px;
         }
 
-        .form-group {
-            margin-bottom: 22px;
+        .form-group{
+            margin-bottom:22px;
         }
 
-        label {
-            display: block;
-            color: white;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            font-weight: 600;
+        label{
+            display:block;
+            color:white;
+            font-size:0.95rem;
+            margin-bottom:8px;
+            font-weight:600;
         }
 
-        input {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            outline: none;
-            transition: 0.3s ease;
+        input{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:14px;
+            font-size:1rem;
+            background:rgba(255,255,255,0.15);
+            color:white;
+            outline:none;
+            transition:0.3s ease;
         }
 
-        input::placeholder {
-            color: #d1d5db;
+        input::placeholder{
+            color:#d1d5db;
         }
 
-        input:focus {
-            background: rgba(255,255,255,0.22);
-            transform: scale(1.01);
+        input:focus{
+            background:rgba(255,255,255,0.22);
+            transform:scale(1.01);
         }
 
-        button {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            color: white;
-            transition: 0.3s ease;
-            margin-top: 10px;
+        button{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:14px;
+            font-size:1rem;
+            font-weight:700;
+            cursor:pointer;
+            background:linear-gradient(135deg,#f97316,#ea580c);
+            color:white;
+            transition:0.3s ease;
+            margin-top:10px;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(249,115,22,0.4);
+        button:hover{
+            transform:translateY(-2px);
+            box-shadow:0 12px 25px rgba(249,115,22,0.4);
         }
 
-        .output {
-            margin-top: 30px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 18px;
-            padding: 25px;
-            color: white;
-            white-space: pre-wrap;
-            line-height: 1.6;
-            min-height: 180px;
-            font-size: 0.96rem;
+        .output{
+            margin-top:30px;
+            background:rgba(255,255,255,0.1);
+            border-radius:18px;
+            padding:25px;
+            color:white;
+            min-height:180px;
         }
 
-        .loading {
-            color: #fbbf24;
-            font-style: italic;
+        .loading{
+            color:#fbbf24;
+            font-style:italic;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
+        #dishBox{
+            margin-bottom:25px;
+            text-align:center;
+        }
+
+        #dishBox h2{
+            color:#fbbf24;
+            font-size:2rem;
+        }
+
+        #ingredientsBox,
+        #stepsBox{
+            margin-top:20px;
+            padding:18px;
+            border-radius:16px;
+            background:rgba(255,255,255,0.08);
+        }
+
+        #ingredientsBox h3,
+        #stepsBox h3{
+            color:#f97316;
+            margin-bottom:12px;
+        }
+
+        #ingredientsBox ul,
+        #stepsBox ol{
+            margin-left:20px;
+            line-height:1.8;
+        }
+
+        @media(max-width:768px){
+
+            .container{
+                padding:25px;
             }
 
-            .title {
-                font-size: 2rem;
+            .title{
+                font-size:2rem;
             }
+
         }
+
     </style>
+
 </head>
 <body>
 
 <div class="container">
+
     <h1 class="title">🍳 RecipeMaker AI</h1>
-    <p class="subtitle">Create delicious AI-powered recipes instantly</p>
+
+    <p class="subtitle">
+        Create delicious AI-powered recipes instantly
+    </p>
 
     <div class="form-group">
         <label>Ingredients *</label>
-        <input type="text" id="ingredients" placeholder="e.g. chicken, onion, tomato">
+
+        <input
+                type="text"
+                id="ingredients"
+                placeholder="e.g. chicken, onion, tomato"
+        >
     </div>
 
     <div class="form-group">
         <label>Cuisine (Optional)</label>
-        <input type="text" id="cuisine" placeholder="e.g. Indian, Italian, Chinese">
+
+        <input
+                type="text"
+                id="cuisine"
+                placeholder="e.g. Indian, Italian, Chinese"
+        >
     </div>
 
     <div class="form-group">
         <label>Diet Plan (Optional)</label>
-        <input type="text" id="dietPlan" placeholder="e.g. High Protein, Keto, Vegan">
+
+        <input
+                type="text"
+                id="dietPlan"
+                placeholder="e.g. High Protein, Keto, Vegan"
+        >
     </div>
 
-    <button onclick="generateRecipe()">Generate Recipe</button>
+    <button onclick="generateRecipe()">
+        Generate Recipe
+    </button>
 
-    <div class="output" id="output">
-        Your AI-generated recipe will appear here...
+    <div class="output">
+
+        <div id="dishBox">
+            Your AI-generated recipe will appear here...
+        </div>
+
+        <div id="ingredientsBox"></div>
+
+        <div id="stepsBox"></div>
+
     </div>
+
 </div>
 
 <script>
-    async function generateRecipe() {
-        const ingredients = document.getElementById("ingredients").value.trim();
-        const cuisine = document.getElementById("cuisine").value.trim();
-        const dietPlan = document.getElementById("dietPlan").value.trim();
-        const output = document.getElementById("output");
 
-        if (!ingredients) {
-            output.textContent = "⚠ Please enter ingredients.";
+    async function generateRecipe() {
+
+        const ingredients =
+            document.getElementById("ingredients")
+                .value
+                .trim();
+
+        const cuisine =
+            document.getElementById("cuisine")
+                .value
+                .trim();
+
+        const dietPlan =
+            document.getElementById("dietPlan")
+                .value
+                .trim();
+
+        const dishBox =
+            document.getElementById("dishBox");
+
+        const ingredientsBox =
+            document.getElementById("ingredientsBox");
+
+        const stepsBox =
+            document.getElementById("stepsBox");
+
+        if(!ingredients){
+
+            dishBox.innerHTML =
+                "⚠ Please enter ingredients.";
+
+            ingredientsBox.innerHTML = "";
+            stepsBox.innerHTML = "";
+
             return;
         }
 
-        output.innerHTML = "<span class='loading'>Generating your recipe...</span>";
+        dishBox.innerHTML =
+            "<span class='loading'>Generating your recipe...</span>";
 
-        let url = `/ask?ingredients=${encodeURIComponent(ingredients)}`;
+        ingredientsBox.innerHTML = "";
+        stepsBox.innerHTML = "";
 
-        if (cuisine) {
-            url += `&cuisine=${encodeURIComponent(cuisine)}`;
+        let url =
+            `/recipe?ingredients=${encodeURIComponent(ingredients)}`;
+
+        if(cuisine){
+            url +=
+                `&cuisine=${encodeURIComponent(cuisine)}`;
         }
 
-        if (dietPlan) {
-            url += `&dietPlan=${encodeURIComponent(dietPlan)}`;
+        if(dietPlan){
+            url +=
+                `&dietPlan=${encodeURIComponent(dietPlan)}`;
         }
 
-        try {
+        try{
+
             const response = await fetch(url);
 
-            if (!response.ok) {
+            if(!response.ok){
                 throw new Error("Request failed");
             }
 
-            const data = await response.text();
-            output.textContent = data;
+            const data = await response.json();
 
-        } catch (error) {
-            console.error(error);
-            output.textContent = "❌ Failed to generate recipe. Please try again.";
+            dishBox.innerHTML = `
+                <h2>${data.dishName}</h2>
+            `;
+
+            ingredientsBox.innerHTML = `
+                <h3>🧂 Ingredients</h3>
+
+                <ul>
+                    ${data.ingredients
+                        .map(i => `<li>${i}</li>`)
+                        .join("")}
+                </ul>
+            `;
+
+            stepsBox.innerHTML = `
+                <h3>👨‍🍳 Steps</h3>
+
+                <ol>
+                    ${data.steps
+                        .map(step => `<li>${step}</li>`)
+                        .join("")}
+                </ol>
+            `;
+
         }
+        catch(error){
+
+            console.error(error);
+
+            dishBox.innerHTML =
+                "❌ Failed to generate recipe.";
+
+            ingredientsBox.innerHTML = "";
+            stepsBox.innerHTML = "";
+
+        }
+
     }
+
 </script>
 
 </body>
